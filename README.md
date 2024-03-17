@@ -49,7 +49,7 @@ A seguir estão os endpoints disponíveis na API:
 - React.js
 - Symfony
 - PHP
-- MySQL
+- PostgreSQL
 
 ## Autor
 
