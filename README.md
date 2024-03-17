@@ -1,40 +1,59 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Documentação do Quadro Societário Web - Teste Prático
 
-## Getting Started
+Este é uma aplicação web para gerenciar o cadastro de empresas e sócios.
 
-First, run the development server:
+## Endpoints da API
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+A seguir estão os endpoints disponíveis na API:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Cadastrar Empresas
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- **URL:** `http://localhost:3000/empresa/cadastrar`
+- **Descrição:** Permite cadastrar uma nova empresa.
+- **Método HTTP:** POST
+- **Corpo da Requisição:** JSON com os dados da empresa (nome, email, CNPJ).
+- **Retorno:** Retorna os detalhes da empresa recém-cadastrada.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### Cadastrar Sócios
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- **URL:** `http://localhost:3000/socio/cadastrar`
+- **Descrição:** Permite cadastrar um novo sócio.
+- **Método HTTP:** POST
+- **Corpo da Requisição:** JSON com os dados do sócio (nome, email, CPF e ID da empresa).
+- **Retorno:** Retorna os detalhes do sócio recém-cadastrado.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Sócios Cadastrados na Empresa
 
-## Learn More
+- **URL:** `http://localhost:3000/empresa/detalhes/{id}`
+- **Descrição:** Exibe os detalhes da empresa e a lista de sócios cadastrados nela.
+- **Método HTTP:** GET
+- **Parâmetro:** ID da empresa.
+- **Retorno:** Retorna os detalhes da empresa e a lista de sócios cadastrados nela.
 
-To learn more about Next.js, take a look at the following resources:
+### Lista de Empresas Cadastradas
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **URL:** `http://localhost:3000/empresas`
+- **Descrição:** Exibe uma lista das empresas cadastradas no sistema.
+- **Método HTTP:** GET
+- **Retorno:** Retorna uma lista das empresas cadastradas.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Setup do Projeto
 
-## Deploy on Vercel
+1. Clone o repositório do projeto: `git clone https://github.com/lvxzxn/quadro-societario-web.git`
+2. Instale as dependências: `npm install`
+3. Execute o projeto: `npm start`
+4. Acesse a aplicação no navegador: `http://localhost:3000`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Tecnologias Utilizadas
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- React.js
+- Symfony
+- PHP
+- PostgreSQL
+
+## Autor
+
+Este projeto foi desenvolvido por [Luiz Guilherme](https://github.com/lvxzxn).
+
+---
+**Observação:** Certifique-se de substituir os placeholders (como  `http://localhost:3000`) pelos valores reais do seu projeto.
