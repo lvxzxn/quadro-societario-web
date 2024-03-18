@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Swal from 'sweetalert2';
 
 export default function CadastrarPage() {
   const [nomeEmpresa, setNomeEmpresa] = useState('');
@@ -27,13 +28,22 @@ export default function CadastrarPage() {
         body: formData,
       });
       
-
       if (!response.ok) {
         throw new Error('Erro ao cadastrar empresa');
       }
 
-      console.log('Empresa cadastrada com sucesso!');
+      await Swal.fire({
+        icon: 'success',
+        title: 'Sucesso!',
+        text: 'Empresa cadastrada com sucesso!'
+      });
     } catch (error) {
+      console.error('Erro ao cadastrar empresa:', error);
+      await Swal.fire({
+        icon: 'error',
+        title: 'Erro!',
+        text: 'Ocorreu um erro ao cadastrar a empresa.'
+      });
     }
   }; 
 

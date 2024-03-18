@@ -1,17 +1,64 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import Swal from "sweetalert2";
 
 export default function EmpresasPage() {
   const [empresas, setEmpresas] = useState<IEmpresa[]>([]);
   const router = useRouter();
+
   const empresaDetails = (id: number) => {
     router.push(`/empresa/detalhes/${id}`);
+  };
+
+  const deleteEmpresa = async (id: number) => {
+    const confirmation = await Swal.fire({
+      title: "Tem certeza?",
+      text: "Esta ação não pode ser revertida!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Sim, deletar!",
+    });
+
+    if (confirmation.isConfirmed) {
+      try {
+        const request = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/empresas/${id}`,
+          {
+            method: "DELETE",
+          }
+        );
+
+        if (!request.ok) {
+          throw new Error("Erro ao deletar empresa");
+        }
+
+        await Swal.fire({
+          icon: "success",
+          title: "Sucesso!",
+          text: "Empresa deletada com sucesso!",
+        });
+
+        const updatedEmpresas = empresas.filter((empresa) => empresa.id !== id);
+        setEmpresas(updatedEmpresas);
+      } catch (error) {
+        console.error("Erro ao deletar empresa:", error);
+        await Swal.fire({
+          icon: "error",
+          title: "Erro!",
+          text: "Ocorreu um erro ao deletar a empresa.",
+        });
+      }
+    }
   };
 
   useEffect(() => {
     const fetchEmpresas = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/empresas`);
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/empresas`
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch empresas");
         }
@@ -70,8 +117,10 @@ export default function EmpresasPage() {
                 <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                   {empresas.map((empresa, index) => (
                     <tr key={index}>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-blue-500 underline hover:cursor-pointer font-medium" 
-                        onClick={() => empresaDetails(empresa.id)}>
+                      <td
+                        className="px-6 py-4 whitespace-nowrap text-sm text-blue-500 underline hover:cursor-pointer font-medium"
+                        onClick={() => empresaDetails(empresa.id)}
+                      >
                         {index + 1}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
@@ -86,6 +135,7 @@ export default function EmpresasPage() {
                       <td className="px-6 py-4 whitespace-nowrap text-start text-sm font-medium">
                         <button
                           type="button"
+                          onClick={() => deleteEmpresa(empresa.id)}
                           className="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-red-600 hover:text-red-800 disabled:opacity-50 disabled:pointer-events-none"
                         >
                           Deletar

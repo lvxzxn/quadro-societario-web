@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 export default function CadastrarPage() {
   const [empresas, setEmpresas] = useState<IEmpresa[]>([]);
@@ -10,10 +11,10 @@ export default function CadastrarPage() {
 
   const handleCPFChange = (event: any) => {
     let { value } = event.target;
-    value = value.replace(/\D/g,"")                   
-    value = value.replace(/(\d{3})(\d)/,"$1.$2")      
-    value = value.replace(/(\d{3})(\d)/,"$1.$2")       
-    value = value.replace(/(\d{3})(\d{1,2})$/,"$1-$2")
+    value = value.replace(/\D/g, "");
+    value = value.replace(/(\d{3})(\d)/, "$1.$2");
+    value = value.replace(/(\d{3})(\d)/, "$1.$2");
+    value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
     setCPF(value);
   };
 
@@ -40,12 +41,21 @@ export default function CadastrarPage() {
       });
 
       if (!response.ok) {
-        throw new Error("Erro ao cadastrar empresa");
+        throw new Error("Erro ao cadastrar sócio");
       }
 
-      console.log("Empresa cadastrada com sucesso!");
+      await Swal.fire({
+        icon: 'success',
+        title: 'Sucesso!',
+        text: 'Sócio cadastrado com sucesso!'
+      });
     } catch (error) {
-      console.error('Erro ao cadastrar empresa');
+      console.error('Erro ao cadastrar sócio:', error);
+      await Swal.fire({
+        icon: 'error',
+        title: 'Erro!',
+        text: 'Ocorreu um erro ao cadastrar o sócio.'
+      });
     }
   };
 
