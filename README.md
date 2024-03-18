@@ -37,6 +37,14 @@ A seguir estão os endpoints disponíveis na API:
 - **Método HTTP:** GET
 - **Retorno:** Retorna uma lista das empresas cadastradas.
 
+### Deletar Empresa
+
+- **URL:** `http://localhost:3000/empresas/{id}`
+- **Descrição:** Permite deletar uma empresa existente.
+- **Método HTTP:** DELETE
+- **Parâmetro:** ID da empresa a ser deletada.
+- **Retorno:** Retorna uma mensagem indicando que a empresa foi deletada com sucesso.
+
 ## Setup do Projeto
 
 1. Clone o repositório do projeto: `git clone https://github.com/lvxzxn/quadro-societario-web.git`
@@ -56,4 +64,4 @@ A seguir estão os endpoints disponíveis na API:
 Este projeto foi desenvolvido por [Luiz Guilherme](https://github.com/lvxzxn).
 
 ---
-**Observação:** Certifique-se de substituir os placeholders (como  `http://localhost:3000`) pelos valores reais do seu projeto.
+**Observação:** Certifique-se de substituir os placeholders (como `http://localhost:3000`) pelos valores reais do seu projeto.
