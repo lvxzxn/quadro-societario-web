@@ -18,6 +18,7 @@ export default function EmpresasPage() {
       showCancelButton: true,
       confirmButtonColor: "#d33",
       cancelButtonColor: "#3085d6",
+      cancelButtonText: 'Cancelar',
       confirmButtonText: "Sim, deletar!",
     });
 
